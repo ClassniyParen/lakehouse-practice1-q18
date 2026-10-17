@@ -1,0 +1,272 @@
+{
+  "engine": "DuckDB",
+  "version": "1.4.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.14",
+  "threads": 4,
+  "memory_limit": "2GB",
+  "sf": 1.0,
+  "timestamp_utc": "2026-10-17T20:31:03.456496+00:00",
+  "repeats": 5,
+  "method": "one warmup then warm filesystem cache; median of full fetch; no cache flush",
+  "metrics": [
+    {
+      "format": "PARQUET",
+      "codec": "ZSTD",
+      "bytes": 193896397,
+      "write_median_s": 2.465820999990683,
+      "query_median_s": 0.1429659000132233,
+      "query_min_s": 0.13886959999217652,
+      "query_max_s": 0.15138799999840558,
+      "write_trials_s": [
+        2.7812033999944106,
+        2.7718385999905877,
+        2.465820999990683,
+        1.821152600023197,
+        1.886776400002418
+      ],
+      "query_trials_s": [
+        0.1437971999985166,
+        0.14209660000051372,
+        0.1429659000132233,
+        0.15138799999840558,
+        0.13886959999217652
+      ]
+    },
+    {
+      "format": "CSV",
+      "codec": "NONE",
+      "bytes": 971609351,
+      "write_median_s": 1.936123800027417,
+      "query_median_s": 2.372877599991625,
+      "query_min_s": 2.154924000002211,
+      "query_max_s": 2.4102974999987055,
+      "write_trials_s": [
+        2.4045700000133365,
+        2.2353411999938544,
+        1.8704293000046164,
+        1.765715600020485,
+        1.936123800027417
+      ],
+      "query_trials_s": [
+        2.154924000002211,
+        2.372877599991625,
+        2.315715699980501,
+        2.4102974999987055,
+        2.3752248999953736
+      ]
+    },
+    {
+      "format": "PARQUET",
+      "codec": "GZIP",
+      "bytes": 192831115,
+      "write_median_s": 10.313441000005696,
+      "query_median_s": 0.18771289999131113,
+      "query_min_s": 0.18062070000451058,
+      "query_max_s": 0.19097789999796078,
+      "write_trials_s": [
+        9.79182340000989,
+        10.684092900017276,
+        10.229531299992232,
+        10.313441000005696,
+        10.375674600014463
+      ],
+      "query_trials_s": [
+        0.19097789999796078,
+        0.19042179998359643,
+        0.18771289999131113,
+        0.18062070000451058,
+        0.18537089999881573
+      ]
+    },
+    {
+      "format": "PARQUET",
+      "codec": "UNCOMPRESSED",
+      "bytes": 536899615,
+      "write_median_s": 1.3383117000048514,
+      "query_median_s": 0.14301999998860992,
+      "query_min_s": 0.1384814000048209,
+      "query_max_s": 0.35591529999510385,
+      "write_trials_s": [
+        1.2443494999897666,
+        1.3383117000048514,
+        1.3289444000110961,
+        1.3614756999886595,
+        1.4204168999858666
+      ],
+      "query_trials_s": [
+        0.35591529999510385,
+        0.14255319998483174,
+        0.1384814000048209,
+        0.15217700001085177,
+        0.14301999998860992
+      ]
+    },
+    {
+      "format": "PARQUET",
+      "codec": "SNAPPY",
+      "bytes": 275891488,
+      "write_median_s": 1.580516300018644,
+      "query_median_s": 0.16179080001893453,
+      "query_min_s": 0.1532461000024341,
+      "query_max_s": 0.18461450000177138,
+      "write_trials_s": [
+        1.777820099989185,
+        1.7406481000070926,
+        1.580516300018644,
+        1.5259770000120625,
+        1.5040954000141937
+      ],
+      "query_trials_s": [
+        0.15864719997625798,
+        0.1532461000024341,
+        0.18461450000177138,
+        0.16179080001893453,
+        0.16440859998692758
+      ]
+    }
+  ],
+  "layers": [
+    {
+      "layer": "bronze",
+      "table": "customer",
+      "rows": 150000,
+      "bytes": 8020744,
+      "columns": [
+        "custkey",
+        "name",
+        "address",
+        "nationkey",
+        "phone",
+        "acctbal",
+        "mktsegment",
+        "comment"
+      ]
+    },
+    {
+      "layer": "bronze",
+      "table": "orders",
+      "rows": 1500000,
+      "bytes": 36535000,
+      "columns": [
+        "orderkey",
+        "custkey",
+        "orderstatus",
+        "totalprice",
+        "orderdate",
+        "orderpriority",
+        "clerk",
+        "shippriority",
+        "comment"
+      ]
+    },
+    {
+      "layer": "bronze",
+      "table": "lineitem",
+      "rows": 6001215,
+      "bytes": 149340653,
+      "columns": [
+        "orderkey",
+        "partkey",
+        "suppkey",
+        "linenumber",
+        "quantity",
+        "extendedprice",
+        "discount",
+        "tax",
+        "returnflag",
+        "linestatus",
+        "shipdate",
+        "commitdate",
+        "receiptdate",
+        "shipinstruct",
+        "shipmode",
+        "comment"
+      ]
+    },
+    {
+      "layer": "silver",
+      "table": "customer",
+      "rows": 150000,
+      "bytes": 251942,
+      "columns": [
+        "custkey",
+        "name"
+      ]
+    },
+    {
+      "layer": "silver",
+      "table": "orders",
+      "rows": 1500000,
+      "bytes": 13885163,
+      "columns": [
+        "orderkey",
+        "custkey",
+        "orderdate",
+        "totalprice"
+      ]
+    },
+    {
+      "layer": "silver",
+      "table": "lineitem",
+      "rows": 6001215,
+      "bytes": 7498570,
+      "columns": [
+        "orderkey",
+        "linenumber",
+        "quantity"
+      ]
+    },
+    {
+      "layer": "silver",
+      "table": "large_orders",
+      "rows": 57,
+      "bytes": 832,
+      "columns": [
+        "orderkey",
+        "total_quantity"
+      ]
+    },
+    {
+      "layer": "silver",
+      "table": "customer_orders",
+      "rows": 57,
+      "bytes": 2265,
+      "columns": [
+        "name",
+        "custkey",
+        "orderkey",
+        "orderdate",
+        "totalprice",
+        "total_quantity"
+      ]
+    },
+    {
+      "layer": "gold",
+      "table": "q18_top100",
+      "rows": 57,
+      "bytes": 2294,
+      "columns": [
+        "name",
+        "custkey",
+        "orderkey",
+        "orderdate",
+        "totalprice",
+        "total_quantity"
+      ]
+    }
+  ],
+  "checks": {
+    "customer_duplicate_keys": 0,
+    "customer_rejected_rows": 0,
+    "orders_duplicate_keys": 0,
+    "orders_rejected_rows": 0,
+    "lineitem_duplicate_keys": 0,
+    "lineitem_rejected_rows": 0,
+    "orphan_orders": 0,
+    "orphan_lineitems": 0
+  },
+  "reference_equal": true,
+  "independent_query_equal": true,
+  "result_sha256": "9c3ceac3d176c22b5a2021d8675a76777b8fa1bf66439f642d09895e113cd9a6"
+}
