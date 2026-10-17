@@ -12,6 +12,7 @@ import random
 import statistics
 import time
 import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
@@ -89,6 +90,17 @@ def main(sf,repeats):
     t=Trino()
     (OUT/'SUCCESS').unlink(missing_ok=True)
     (OUT/'queries.jsonl').write_text('',encoding='utf-8')
+    # /v1/info can become available before access control/catalog initialization.
+    for attempt in range(90):
+        try:
+            t.rows('SELECT 1')
+            break
+        except (RuntimeError,urllib.error.HTTPError) as error:
+            if 'SERVER_STARTING_UP' not in str(error) and not (isinstance(error,urllib.error.HTTPError) and error.code==503):
+                raise
+            if attempt==89:
+                raise
+            time.sleep(2)
     source=f'tpch.sf{sf}'
     reference=(ROOT/'sql/q18.sql').read_text(encoding='utf-8')
     expected,_,columns=t.query(reference.format(schema=source))
