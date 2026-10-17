@@ -1,0 +1,60 @@
+name: Verify lakehouse
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: lakehouse-verification
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      RUN_CONTEXT: GitHub Actions ubuntu-24.04 single Docker host
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack submitted source bundle
+        run: |
+          if test -f source.zip; then
+            python3 -m zipfile -e source.zip .
+            git rm source.zip
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add . ':!.github'
+          if ! git diff --cached --quiet; then
+            git commit -m 'Add lakehouse source and independent local verification'
+            git push
+          fi
+      - name: Run the complete Docker stack and collect actual measurements
+        run: sh start.sh
+      - name: Collect diagnostics
+        if: always()
+        run: |
+          mkdir -p results/trino
+          docker compose ps --all > results/trino/docker-ps.txt
+          docker compose logs --no-color > results/trino/docker.log
+          docker compose images > results/trino/docker-images.txt
+      - name: Publish verified report and measurements
+        if: success()
+        run: |
+          git add README.md отчёт.md results
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record verified Trino Iceberg benchmark and BI evidence'
+            git push
+          fi
+      - name: Preserve report and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: practice1-q18-evidence
+          path: |
+            results/
+            отчёт.md
+          retention-days: 30
+      - name: Stop temporary services
+        if: always()
+        run: docker compose --profile bi down
