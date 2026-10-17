@@ -16,12 +16,10 @@ def request(path, body=None):
 
 try:
     request('/bootstrap', {'accept-terms-of-use':True})
-except urllib.error.HTTPError as e:
-    if e.code not in (400,409):
+except urllib.error.HTTPError as error:
+    if error.code not in (400,403,409):
         raise
-    # Only continue if management API is actually usable.
-    request('/warehouse?project-id=00000000-0000-0000-0000-000000000000')
-
+    # Existing initialization is accepted only if management readback succeeds.
 warehouses=request('/warehouse?project-id=00000000-0000-0000-0000-000000000000')
 if not any(w['warehouse-name']=='practice1' for w in warehouses.get('warehouses',[])):
     request('/warehouse',{

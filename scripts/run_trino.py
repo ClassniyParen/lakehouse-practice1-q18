@@ -13,6 +13,7 @@ import statistics
 import time
 import urllib.request
 from datetime import datetime, timezone
+from decimal import Decimal
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -78,6 +79,12 @@ def write_csv(name,columns,rows):
         writer=csv.writer(f);writer.writerow(columns);writer.writerows(rows)
 
 
+def canonical(rows):
+    # Trino HTTP encodes DECIMAL as text and DOUBLE as a JSON number.
+    # The declared business scale is two decimal places for prices/quantities.
+    return [tuple(r[:4])+tuple(Decimal(str(v)).quantize(Decimal('0.01')) for v in r[4:6]) for r in rows]
+
+
 def main(sf,repeats):
     t=Trino()
     (OUT/'SUCCESS').unlink(missing_ok=True)
@@ -110,7 +117,7 @@ def main(sf,repeats):
     assert all(v==0 for v in checks.values()),checks
     gold=t.rows('SELECT * FROM lake.gold.q18_top100 ORDER BY totalprice DESC,orderdate,orderkey')
     bronze=t.rows(reference.format(schema='lake.bronze'))
-    assert gold==expected==bronze,'Gold differs from reference TPC-H or Bronze'
+    assert canonical(gold)==canonical(expected)==canonical(bronze),'Gold differs from reference TPC-H or Bronze'
     checks['reference_equals_bronze_equals_gold']=True
     dump('checks.json',checks);write_csv('q18_top100.csv',columns,gold)
     layers=[]
@@ -178,6 +185,9 @@ def main(sf,repeats):
     dump('evolution.json',dict(snapshot_id=snapshot,rows_before=len(before),rows_after_delete=current_count,
           time_travel_count=old_count,rows_after_rollback=len(restored),data_files_unchanged_on_schema_edit=True,
           added_column_existing_rows_null=True,restored_equal=True,columns=t.rows(f'DESCRIBE {table}')))
+    # Superset runs as uid 1000 while checkout files on Linux may belong to 1001.
+    # Only the public evidence directory needs cross-container write permission.
+    os.chmod(ROOT/'results',0o777)
     (OUT/'SUCCESS').write_text('All actual Trino checks passed\n',encoding='utf-8')
     print('PASS: pipeline, benchmark, schema evolution, time travel, rollback',flush=True)
 
