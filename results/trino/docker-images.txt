@@ -1,0 +1,9 @@
+CONTAINER                    REPOSITORY                   TAG                            PLATFORM            IMAGE ID            SIZE                CREATED
+practice1-q18-bootstrap-1    python                       3.12.10-slim                   linux/amd64         acf8897bf01a        124MB               292 years ago
+practice1-q18-bucket-1       pgsty/silo                   RELEASE.2026-09-03T13-18-01Z   linux/amd64         3ac2e44e50be        159MB               292 years ago
+practice1-q18-lakekeeper-1   quay.io/lakekeeper/catalog   v0.10.0                        linux/amd64         8f42a64ba235        125MB               292 years ago
+practice1-q18-migrate-1      quay.io/lakekeeper/catalog   v0.10.0                        linux/amd64         8f42a64ba235        125MB               292 years ago
+practice1-q18-minio-1        pgsty/silo                   RELEASE.2026-09-03T13-18-01Z   linux/amd64         3ac2e44e50be        159MB               292 years ago
+practice1-q18-postgres-1     postgres                     16.10                          linux/amd64         23ab7b9541a2        451MB               292 years ago
+practice1-q18-superset-1     practice1-q18-superset       latest                         linux/amd64         0cab5cee7ce8        950MB               19 seconds ago
+practice1-q18-trino-1        trinodb/trino                484                            linux/amd64         e54a8dff51ae        1.36GB              292 years ago

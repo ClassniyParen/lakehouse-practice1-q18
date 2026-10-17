@@ -1,0 +1,11 @@
+{
+  "customer_duplicate_keys": 0,
+  "orders_duplicate_keys": 0,
+  "lineitem_duplicate_keys": 0,
+  "customer_rejected_rows": 0,
+  "orders_rejected_rows": 0,
+  "lineitem_rejected_rows": 0,
+  "orphan_orders": 0,
+  "orphan_lineitems": 0,
+  "reference_equals_bronze_equals_gold": true
+}

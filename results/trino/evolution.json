@@ -1,0 +1,54 @@
+{
+  "snapshot_id": 2043934433706406374,
+  "rows_before": 57,
+  "rows_after_delete": 56,
+  "time_travel_count": 57,
+  "rows_after_rollback": 57,
+  "data_files_unchanged_on_schema_edit": true,
+  "added_column_existing_rows_null": true,
+  "restored_equal": true,
+  "columns": [
+    [
+      "name",
+      "varchar",
+      "",
+      ""
+    ],
+    [
+      "custkey",
+      "bigint",
+      "",
+      ""
+    ],
+    [
+      "orderkey",
+      "bigint",
+      "",
+      ""
+    ],
+    [
+      "orderdate",
+      "date",
+      "",
+      ""
+    ],
+    [
+      "totalprice",
+      "decimal(15,2)",
+      "",
+      ""
+    ],
+    [
+      "total_quantity",
+      "decimal(38,2)",
+      "",
+      ""
+    ],
+    [
+      "processing_note",
+      "varchar",
+      "",
+      ""
+    ]
+  ]
+}

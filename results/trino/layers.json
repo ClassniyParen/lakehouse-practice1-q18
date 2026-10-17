@@ -1,0 +1,204 @@
+[
+  {
+    "layer": "bronze",
+    "table": "customer",
+    "rows": 150000,
+    "bytes": 7649053,
+    "files": [
+      [
+        "s3://lakehouse/practice1/01a14ba2-1669-7762-a642-90609d8c1f92/customer-9e5b3ff5903741d082495cbd070396b8/data/20261017_205116_00020_t5f85-7d60e144-6d27-4668-a385-8c4b012a7711.parquet",
+        7649053
+      ]
+    ],
+    "columns": [
+      "custkey",
+      "name",
+      "address",
+      "nationkey",
+      "phone",
+      "acctbal",
+      "mktsegment",
+      "comment"
+    ]
+  },
+  {
+    "layer": "bronze",
+    "table": "orders",
+    "rows": 1500000,
+    "bytes": 34996435,
+    "files": [
+      [
+        "s3://lakehouse/practice1/01a14ba2-1669-7762-a642-90609d8c1f92/orders-3753934da49342cfb7c58509438d675e/data/20261017_205119_00021_t5f85-beb80b41-95b4-44fe-81c9-04e3a9a8bda8.parquet",
+        6545139
+      ],
+      [
+        "s3://lakehouse/practice1/01a14ba2-1669-7762-a642-90609d8c1f92/orders-3753934da49342cfb7c58509438d675e/data/20261017_205119_00021_t5f85-39c91905-1079-4d1f-8303-7bb5f7ea392e.parquet",
+        28451296
+      ]
+    ],
+    "columns": [
+      "orderkey",
+      "custkey",
+      "orderstatus",
+      "totalprice",
+      "orderdate",
+      "orderpriority",
+      "clerk",
+      "shippriority",
+      "comment"
+    ]
+  },
+  {
+    "layer": "bronze",
+    "table": "lineitem",
+    "rows": 6001215,
+    "bytes": 148073820,
+    "files": [
+      [
+        "s3://lakehouse/practice1/01a14ba2-1669-7762-a642-90609d8c1f92/lineitem-002c38559b94483fb5cc9edf29b20024/data/20261017_205123_00022_t5f85-49304463-7d52-40b5-b166-b7c027d1e0c4.parquet",
+        22028970
+      ],
+      [
+        "s3://lakehouse/practice1/01a14ba2-1669-7762-a642-90609d8c1f92/lineitem-002c38559b94483fb5cc9edf29b20024/data/20261017_205123_00022_t5f85-f57a04b2-4a23-4d50-bc46-88e2587ea07b.parquet",
+        28929954
+      ],
+      [
+        "s3://lakehouse/practice1/01a14ba2-1669-7762-a642-90609d8c1f92/lineitem-002c38559b94483fb5cc9edf29b20024/data/20261017_205123_00022_t5f85-f62b3789-630d-42cc-a2f6-be95f85e99d9.parquet",
+        38808720
+      ],
+      [
+        "s3://lakehouse/practice1/01a14ba2-1669-7762-a642-90609d8c1f92/lineitem-002c38559b94483fb5cc9edf29b20024/data/20261017_205123_00022_t5f85-3ac97cd4-f27b-4136-8abe-a7f4be9bc25d.parquet",
+        58306176
+      ]
+    ],
+    "columns": [
+      "orderkey",
+      "partkey",
+      "suppkey",
+      "linenumber",
+      "quantity",
+      "extendedprice",
+      "discount",
+      "tax",
+      "returnflag",
+      "linestatus",
+      "shipdate",
+      "commitdate",
+      "receiptdate",
+      "shipinstruct",
+      "shipmode",
+      "comment"
+    ]
+  },
+  {
+    "layer": "silver",
+    "table": "customer",
+    "rows": 150000,
+    "bytes": 294619,
+    "files": [
+      [
+        "s3://lakehouse/practice1/01a14ba2-169e-7771-9c38-122aadeed7ae/customer-c190e8f4e9994f3fbda7ada6ddd77642/data/20261017_205140_00026_t5f85-a69e35e6-27bb-4a8e-a49b-587cdad34747.parquet",
+        294619
+      ]
+    ],
+    "columns": [
+      "custkey",
+      "name"
+    ]
+  },
+  {
+    "layer": "silver",
+    "table": "orders",
+    "rows": 1500000,
+    "bytes": 12905965,
+    "files": [
+      [
+        "s3://lakehouse/practice1/01a14ba2-169e-7771-9c38-122aadeed7ae/orders-5f71e4b1f741454ea39825e86c7b6c80/data/20261017_205141_00027_t5f85-7c3c6d16-c88c-4640-a803-933a1fc2716d.parquet",
+        12905965
+      ]
+    ],
+    "columns": [
+      "orderkey",
+      "custkey",
+      "orderdate",
+      "totalprice"
+    ]
+  },
+  {
+    "layer": "silver",
+    "table": "lineitem",
+    "rows": 6001215,
+    "bytes": 8528676,
+    "files": [
+      [
+        "s3://lakehouse/practice1/01a14ba2-169e-7771-9c38-122aadeed7ae/lineitem-30edec09af9e4142b8411db32c96fcbc/data/20261017_205142_00028_t5f85-b4cf963f-8e07-4c09-b5bc-d7a3b08c510a.parquet",
+        618484
+      ],
+      [
+        "s3://lakehouse/practice1/01a14ba2-169e-7771-9c38-122aadeed7ae/lineitem-30edec09af9e4142b8411db32c96fcbc/data/20261017_205142_00028_t5f85-2c2c63f6-edbd-497a-9848-efabf2afbedb.parquet",
+        7910192
+      ]
+    ],
+    "columns": [
+      "orderkey",
+      "linenumber",
+      "quantity"
+    ]
+  },
+  {
+    "layer": "silver",
+    "table": "large_orders",
+    "rows": 57,
+    "bytes": 858,
+    "files": [
+      [
+        "s3://lakehouse/practice1/01a14ba2-169e-7771-9c38-122aadeed7ae/large_orders-e2c5616b046641f0b2c3ab75c4c7a4fb/data/20261017_205145_00029_t5f85-f43cd5c4-f193-4b5a-9481-5fbd71b99206.parquet",
+        858
+      ]
+    ],
+    "columns": [
+      "orderkey",
+      "total_quantity"
+    ]
+  },
+  {
+    "layer": "silver",
+    "table": "customer_orders",
+    "rows": 57,
+    "bytes": 2284,
+    "files": [
+      [
+        "s3://lakehouse/practice1/01a14ba2-169e-7771-9c38-122aadeed7ae/customer_orders-9809125bae7e4335b4cedd7a5a44404a/data/20261017_205146_00030_t5f85-adf7a183-a28b-405f-a4cf-6ceec93b716e.parquet",
+        2284
+      ]
+    ],
+    "columns": [
+      "name",
+      "custkey",
+      "orderkey",
+      "orderdate",
+      "totalprice",
+      "total_quantity"
+    ]
+  },
+  {
+    "layer": "gold",
+    "table": "q18_top100",
+    "rows": 57,
+    "bytes": 2277,
+    "files": [
+      [
+        "s3://lakehouse/practice1/01a14ba2-16bb-75d3-b5fd-08840e1d6c19/q18_top100-d7dec8aff7ab408187a2ea083e6fee4a/data/20261017_205146_00031_t5f85-4f78d895-5aa0-4450-a047-a82f30269da3.parquet",
+        2277
+      ]
+    ],
+    "columns": [
+      "name",
+      "custkey",
+      "orderkey",
+      "orderdate",
+      "totalprice",
+      "total_quantity"
+    ]
+  }
+]

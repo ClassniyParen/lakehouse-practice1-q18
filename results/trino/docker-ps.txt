@@ -1,0 +1,9 @@
+NAME                         IMAGE                                     COMMAND                  SERVICE      CREATED          STATUS                             PORTS
+practice1-q18-bootstrap-1    python:3.12.10-slim                       "python /scripts/boo…"   bootstrap    10 minutes ago   Exited (0) 10 minutes ago          
+practice1-q18-bucket-1       pgsty/silo:RELEASE.2026-09-03T13-18-01Z   "/bin/sh -c 'mc alia…"   bucket       10 minutes ago   Exited (0) 10 minutes ago          
+practice1-q18-lakekeeper-1   quay.io/lakekeeper/catalog:v0.10.0        "/home/nonroot/lakek…"   lakekeeper   10 minutes ago   Up 10 minutes (healthy)            127.0.0.1:8181->8181/tcp
+practice1-q18-migrate-1      quay.io/lakekeeper/catalog:v0.10.0        "/home/nonroot/lakek…"   migrate      10 minutes ago   Exited (0) 10 minutes ago          
+practice1-q18-minio-1        pgsty/silo:RELEASE.2026-09-03T13-18-01Z   "/usr/bin/docker-ent…"   minio        10 minutes ago   Up 10 minutes (healthy)            127.0.0.1:9000-9001->9000-9001/tcp
+practice1-q18-postgres-1     postgres:16.10                            "docker-entrypoint.s…"   postgres     10 minutes ago   Up 10 minutes (healthy)            5432/tcp
+practice1-q18-superset-1     practice1-q18-superset                    "/bin/sh /app/local/…"   superset     19 seconds ago   Up 19 seconds (health: starting)   127.0.0.1:8088->8088/tcp
+practice1-q18-trino-1        trinodb/trino:484                         "/usr/lib/trino/bin/…"   trino        10 minutes ago   Up 10 minutes (healthy)            127.0.0.1:8080->8080/tcp

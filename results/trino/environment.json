@@ -1,0 +1,17 @@
+{
+  "sf": 1,
+  "repeats": 5,
+  "engine": "Trino",
+  "version": "484",
+  "timestamp_utc": "2026-10-17T20:51:15.826496+00:00",
+  "run_context": "GitHub Actions ubuntu-24.04 single Docker host",
+  "nodes": [
+    [
+      "ce2bc5e68c31",
+      "http://172.18.0.5:8080",
+      "484",
+      true,
+      "active"
+    ]
+  ]
+}
